@@ -98,7 +98,7 @@
     <script>
         document.getElementById('registrationForm').addEventListener('submit', function(event) {
             event.preventDefault();  // Prevent form submission for demo
-            
+
             // Collect form data
             const formData = new FormData(this);
             const userData = {};
@@ -113,6 +113,16 @@
             // Get selected role before file reading
             var selectedRole = document.getElementById("role").value;
 
+            // Function to handle redirection after data storage
+            function redirectUser() {
+                alert('Registration Successful!');
+                if (selectedRole === "shopkeeper") { 
+                    window.location.href = 'index2.html';
+                } else if (selectedRole === "wholesaler") { 
+                    window.location.href = 'index3.html';
+                }
+            }
+
             // Handle license file
             const licenseFile = document.getElementById('License').files[0];
             if (licenseFile) {
@@ -124,28 +134,19 @@
                     // Save all user data to localStorage
                     localStorage.setItem('userData', JSON.stringify(userData));
 
-                    // Show success message and redirect based on role
-                    alert('Registration Successful!');
-                    if (selectedRole === "shopkeeper") { 
-                        window.location.href = 'index2.html';
-                    } else { 
-                        window.location.href = 'index3.html';
-                    }
+                    // Redirect user based on role
+                    redirectUser();
                 };
                 reader.readAsDataURL(licenseFile);
             } else {
                 // Save user data without license
                 localStorage.setItem('userData', JSON.stringify(userData));
 
-                // Show success message and redirect based on role
-                alert('Registration Successful!');
-                if (selectedRole === "shopkeeper") { 
-                    window.location.href = 'index2.html';
-                } else { 
-                    window.location.href = 'index3.html';
-                }
+                // Redirect user based on role
+                redirectUser();
             }
         });
     </script>
+
 </body>
 </html>
