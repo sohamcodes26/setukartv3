@@ -1,0 +1,348 @@
+body
+{
+    margin: 0;
+}
+
+#badge
+{
+    position: absolute;
+    background-color: rgb(255, 30, 30);
+    color: white;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 14px;
+    bottom: 40px;
+    right: 6.4rem;
+}
+
+#container
+{
+    background-color: #5c63f9;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Lato', sans-serif;
+    z-index: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149); 
+    
+}
+
+#shopName 
+{
+    font-size: 40px; 
+    font-family: 'Lato', sans-serif;
+}
+
+#shopName a img
+{
+    height: 58px;
+}
+
+#shopName > b
+{
+    font-weight: 900;
+    font: black;
+}
+
+#collection
+{
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    display: none;
+}
+
+#collection a
+{
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+}
+
+#search
+{
+    display:none;
+}
+
+.search
+{
+    padding: 14px;
+    /* color: gray; */
+    color: rgb(29, 29, 29);
+    min-width: 25px;
+    text-align: center;
+    position: absolute;
+    
+}
+
+.addedToCart
+{
+    font-size: 1.5em;
+}
+
+#user
+{
+    display: flex;
+    /* float: right; */
+    gap: 1.2rem;
+    align-items: center;
+    font-size: 19px ;
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+#user a
+{
+    display: none;
+}
+
+.userIcon
+{
+    font-size: 45px;
+}
+
+
+#input 
+{
+    width: 35em;
+    height: 3em;
+    padding: 2px 50px;
+    background-color: rgb(241, 241, 241);
+    border: none;
+    border-radius: 5px;
+}
+
+
+#input::placeholder
+{
+    font-weight: bold;
+}
+
+
+#input:focus
+{
+    outline: none;
+}
+
+
+#user a
+{
+    color: rgb(29, 29, 29)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Popup Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+}
+
+
+
+/* Popup Card */
+.popup-card {
+    background-color: #5c63f9;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #312d2d;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Card container for the choice cards */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+/* Choice card styles */
+.choice-card {
+    background-color: #5c63f9;
+    color: white;
+    width: 45%;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for choice cards */
+.choice-card:hover {
+    background-color: #4b52d0;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------- MEDIA QUERY --------------------------- */
+
+@media(max-width: 1300px)
+{
+    #collection
+    {
+        font-size: 13px;
+    }
+    #input 
+    {
+        width: 25em;
+    }
+}
+@media(max-width: 1212px)
+{
+    #collection
+    {
+        font-size: 13px;
+    }
+    #input 
+    {
+        width: 20em;
+    }
+    .addedToCart
+    {
+        font-size: 1.5em;
+        margin: 10px 20px;
+    }
+}
+
+@media(max-width: 1090px)
+{
+    
+    #search
+    {
+        display: none;
+    }
+}
+@media(max-width: 750px)
+{
+    #shopName
+    {
+        font-size: 28px;
+    }
+    #collection
+    {
+        font-size: 12px;
+    }
+    .userIcon
+    {
+        font-size: 35px;
+    }
+    .addedToCart
+    {
+        font-size: 1.2em;
+        margin: 10px 20px;
+    }
+}
+
+@media(max-width: 650px)
+{
+    #shopName
+    {
+        font-size: 24px;
+    }
+    #collection
+    {
+        font-size: 10px;
+    }
+    .userIcon
+    {
+        font-size: 30px;
+    }
+}
+@media(max-width: 550px)
+{
+    #container 
+    {
+        padding: 20px 25px;
+    }
+}
+
+/* badge media */
+
