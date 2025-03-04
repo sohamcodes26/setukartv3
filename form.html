@@ -124,7 +124,13 @@
                     
                     // Show success message and redirect
                     alert('Registration Successful!');
-                    window.location.href = 'index2.html';
+                    if(selectedRole=="Shopkeeper")
+                    {
+                        window.location.href = 'index2.html';
+                    }
+                    else{
+                        window.location.href = 'index3.html';
+                    }
                 };
                 reader.readAsDataURL(licenseFile);
             } else {
