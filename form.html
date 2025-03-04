@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 97%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <!-- Name -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <!-- Phone Number -->
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required pattern="^\+?[1-9]\d{1,14}$" placeholder="Enter phone number">
+
+            <!-- Driver License -->
+            <label for="License">Upload Applicable License(GST Registration/FSSAI License/etc):</label>
+            <input type="file" id="License" name="License" accept="image/*,application/pdf" required>
+
+            <!-- Address -->
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required rows="4" placeholder="Enter your address"></textarea>
+
+            <!-- Type -->
+            <label for="type">Type of Shopkeeper/Wholesaler:</label>
+            <input type="text" id="type" name="type" required>
+
+            <!-- Wholesaler / Shopkeeper -->
+            <label for="role">Select Role:</label>
+            <select id="role" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="wholesaler">Wholesaler</option>
+                <option value="shopkeeper">Shopkeeper</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form submission for demo
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const userData = {};
+            
+            // Extract and store regular form fields
+            userData.name = formData.get('name');
+            userData.phone = formData.get('phone');
+            userData.address = formData.get('address');
+            userData.type = formData.get('type');
+            userData.role = formData.get('role');
+            
+            // Handle license file
+            const licenseFile = document.getElementById('License').files[0];
+            if (licenseFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Store the license file as a data URL
+                    userData.licensePreview = e.target.result;
+                    
+                    // Save all user data to localStorage
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    
+                    // Show success message and redirect
+                    alert('Registration Successful!');
+                    window.location.href = 'index2.html';
+                };
+                reader.readAsDataURL(licenseFile);
+            } else {
+                // Save user data without license
+                localStorage.setItem('userData', JSON.stringify(userData));
+                var selectedRole = document.getElementById("role").value;
+                
+                // Show success message and redirect
+                alert('Registration Successful!');
+                if(selectedRole=="Shopkeeper")
+                {
+                    window.location.href = 'index2.html';
+                }
+                else{
+                    window.location.href = 'index3.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

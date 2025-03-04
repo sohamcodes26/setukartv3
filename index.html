@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <title> E-COMMERCE WEBSITE BY EDYODA | CREATED BY PRIYANKA SHARMA </title>
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <!-- header links -->
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <!-- slider links -->
+    <!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+    <script src="js/jQuery3.4.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+    <link rel="stylesheet" href="css/header.css">
+    <!-- Product Cards Styling -->
+    <style>
+        .products-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .products-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Lato', sans-serif;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .company-name {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #e63946;
+            font-size: 16px;
+        }
+        
+        .min-order {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Product Detail Styles */
+        .product-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            overflow-y: auto;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .detail-container {
+            background-color: white;
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .detail-content {
+            display: flex;
+            flex-direction: row;
+        }
+
+        @media (max-width: 768px) {
+            .detail-content {
+                flex-direction: column;
+            }
+        }
+
+        .detail-image-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-info {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .detail-product-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .detail-company-name {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .detail-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e63946;
+            margin-bottom: 5px;
+        }
+        
+        .detail-min-order {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .detail-specs {
+            margin-bottom: 20px;
+        }
+        
+        .detail-specs h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .detail-specs ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .detail-specs li {
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .detail-description {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .quantity-selector label {
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .quantity-selector input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .bulk-pricing {
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .bulk-pricing h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .bulk-pricing table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .bulk-pricing th, .bulk-pricing td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .bulk-pricing th {
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #c1121f;
+        }
+        
+        .request-quote {
+            background-color: #2a6dc9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .request-quote:hover {
+            background-color: #1a5cb8;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .actions-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div id="1">
+        <header>
+            <section>
+                <!-- MAIN CONTAINER -->
+                <div id="container">
+
+                    <!-- SHOP NAME -->
+                    <div id="shopName"><a href="index.html"><img src="img/logo.jpg" alt=""></div>
+
+                        <!-- COLLCETIONS ON WEBSITE -->
+                        <div id="collection">
+                            <div id="clothing"><a href="clothing.html"> CLOTHING </a></div>
+                            <div id="accessories"><a href="accessories.html"> ACCESSORIES </a></div>
+                        </div>
+
+                        <!-- SEARCH SECTION -->
+                        <div id="search">
+                            <i class="fas fa-search search"></i>
+                            <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories">
+                        </div>
+
+                        <!-- USER SECTION (CART AND USER ICON) -->
+                        <div id="user">
+                            <a id="cartbtn" href="cart.html"> <i class="fas fa-shopping-cart addedToCart"><div id="badge"> 0 </div> </i></a>
+                            
+                            <a id="usrbtn" href="#"> <i class="fas fa-user-circle userIcon"></i> </a>
+
+                            <div href="#" id="registerBtn" >Register</div>
+
+                            <div href="#" id="loginBtn" >Login</div>
+                        </div>
+                </div>
+    
+            </section>
+        </header>
+    </div>
+    
+
+    
+
+
+    <!-- SLIDER -->
+    <div id="2"></div>
+    <script>
+        load("slider.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(2).innerHTML = req.responseText;
+        }
+    </script>
+
+    <!-- CONTENT SECTION -->
+    <div id="3" class="products-container">
+        <h2>Wholesale Products</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- Product cards will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-detail" id="productDetail">
+        <span class="close-button" onclick="closeDetail()">&times;</span>
+        <div class="detail-container">
+            <div class="detail-content">
+                <div class="detail-image-container">
+                    <img src="" alt="Product" class="detail-image" id="detailImage">
+                </div>
+                <div class="detail-info">
+                    <h2 class="detail-product-name" id="detailName"></h2>
+                    <p class="detail-company-name" id="detailCompany"></p>
+                    <p class="detail-price" id="detailPrice"></p>
+                    <p class="detail-min-order" id="detailMinOrder"></p>
+                    
+                    <div class="detail-specs" id="detailSpecs">
+                        <!-- Specifications will be inserted here -->
+                    </div>
+                    
+                    <p class="detail-description" id="detailDescription"></p>
+                    
+                    <div class="bulk-pricing" id="bulkPricing">
+                        <h3>Volume Discount</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Quantity</th>
+                                    <th>Price per Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bulkPricingTable">
+                                <!-- Bulk pricing will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" min="1" value="1">
+                    </div>
+                    
+                    <div class="actions-container">
+                        <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                        <button class="request-quote" onclick="requestQuote()">Request Quote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="4"></div>
+    <script>
+        load("footer.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(4).innerHTML = req.responseText;
+        }
+    </script>
+
+</body>
+
+<!-- slider JS START -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script>
+    $(document).ready(function()
+    {
+    $('#containerSlider').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1500,
+        });
+    });
+</script>
+<!-- slider JS ENDS -->
+
+<!-- Product Cards JS -->
+<script>
+    // Sample wholesale product data
+    const products = [
+        {
+            id: 1,
+            name: "Cotton T-Shirts (Bulk Pack)",
+            company: "TextilePro",
+            price: "300Rs per unit",
+            minOrder: "Minimum order: 50 pieces",
+            image: "img//tshirt.webp",
+            description: "Premium quality cotton t-shirts available in multiple colors and sizes. Perfect for customization with screen printing or embroidery. Fast order processing with consistent sizing across batches.",
+            specs: [
+                "Material: 100% Combed Cotton, 180 GSM",
+                "Available colors: Black, White, Navy, Grey, Red",
+                "Sizes: S, M, L, XL, XXL",
+                "Ribbed collar with double stitching",
+                "Pre-shrunk fabric"
+            ],
+            bulkPricing: [
+                { quantity: "50-99", price: "300Rs" },
+                { quantity: "100-499", price: "280Rs" },
+                { quantity: "500-999", price: "265Rs" },
+                { quantity: "1000+", price: "$250Rs" }
+            ]
+        },
+
+        {
+            id: 2,
+            name: "Stainless Steel Cookware Set (Bulk Pack)",
+            company: "HomeEssentials",
+            price: "1500Rs per set",
+            minOrder: "Minimum order: 30 sets",
+            image: "img//cook.webp",
+            description: "Premium stainless steel cookware set, designed for durability and long-lasting use. This set includes multiple pots, pans, and lids, perfect for restaurants, catering services, or bulk purchasing for resale.",
+            specs: [
+                "Material: 100% High-Grade Stainless Steel",
+                "Set includes: 2 Pots, 2 Pans, 1 Frying Pan, 2 Lids",
+                "Oven and dishwasher safe",
+                "Heat-resistant handles for safety",
+                "Compatible with all stovetops (including induction)",
+                "Highly resistant to rust and corrosion"
+            ],
+            bulkPricing: [
+                { quantity: "30-99", price: "1500Rs" },
+                { quantity: "100-499", price: "1400Rs" },
+                { quantity: "500-999", price: "1300Rs" },
+                { quantity: "1000+", price: "1200Rs" }
+            ]
+        },
+
+        {
+            id: 3,
+            name: "Wooden Toy Sets (Bulk Pack)",
+            company: "Toyland",
+            price: "500Rs per set",
+            minOrder: "Minimum order: 100 sets",
+            image: "img/wooden_toys.webp",  // Add the image path for the toy set
+            description: "Eco-friendly, handcrafted wooden toy sets for children, including building blocks, animals, and other figures. Safe, non-toxic paint, and designed to enhance creative play. Perfect for educational and fun playtime.",
+            specs: [
+                "Material: High-quality natural wood",
+                "Paint: Non-toxic, water-based colors",
+                "Includes: 10+ different shapes and figures (blocks, animals, etc.)",
+                "Recommended Age: 3+ years",
+                "Dimensions: Varying sizes depending on the toy",
+                "Eco-friendly packaging"
+            ],
+            bulkPricing: [
+                { quantity: "100-499", price: "500Rs" },
+                { quantity: "500-999", price: "450Rs" },
+                { quantity: "1000+", price: "400Rs" }
+            ]
+        },
+        {
+            id: 4,
+            name: "Premium Curtains (Bulk Pack)",
+            company: "HomeStyle",
+            price: "800Rs per set",
+            minOrder: "Minimum order: 50 sets",
+            image: "img/curtains.webp",  // Add the image path for the curtains
+            description: "High-quality premium curtains made from soft fabric, available in various sizes and colors. Perfect for residential and commercial use. These curtains offer excellent light blocking and privacy. Ready for quick delivery with customizable options for bulk orders.",
+            specs: [
+                "Material: 100% Polyester, soft fabric with a smooth finish",
+                "Available colors: Beige, Grey, Navy, White, Red",
+                "Sizes: 5x6 feet, 6x7 feet, 7x8 feet, customizable",
+                "Thermal insulation for temperature control",
+                "Easy to wash, fade-resistant",
+                "Includes hooks and curtain rings"
+            ],
+            bulkPricing: [
+                { quantity: "50-99", price: "800Rs" },
+                { quantity: "100-499", price: "750Rs" },
+                { quantity: "500-999", price: "700Rs" },
+                { quantity: "1000+", price: "650Rs" }
+            ]
+        },
+        {
+            id: 5,
+            name: "Ergonomic Office Chair (Bulk Pack)",
+            company: "OfficePro",
+            price: "3500Rs per chair",
+            minOrder: "Minimum order: 20 chairs",
+            image: "img/office-chair.webp",
+            description: "Ergonomic office chairs designed for comfort and support during long work hours. Ideal for corporate offices, home offices, and bulk purchases. Adjustable height, lumbar support, and durable fabric.",
+            specs: [
+                "Material: Mesh fabric with adjustable armrests",
+                "Color options: Black, Grey, Blue, Red",
+                "Height adjustment: 12cm",
+                "Weight capacity: 120kg",
+                "Durable and easy to assemble"
+            ],
+            bulkPricing: [
+                { quantity: "20-49", price: "3500Rs" },
+                { quantity: "50-99", price: "3300Rs" },
+                { quantity: "100-499", price: "3100Rs" },
+                { quantity: "500+", price: "2900Rs" }
+            ]
+        },
+        {
+            id: 6,
+            name: "Premium Wall Paint (Bulk Pack)",
+            company: "ColorPro",
+            price: "1500Rs per can (10L)",
+            minOrder: "Minimum order: 50 cans",
+            image: "img/paint-can.webp",
+            description: "High-quality wall paint in a variety of colors and finishes. Perfect for residential, commercial, and bulk orders. Fast-drying, long-lasting, and easy to apply.",
+            specs: [
+                "Available colors: Matte, Glossy, Satin",
+                "Coverage: 10-12 sq.m per liter",
+                "Durability: 5+ years",
+                "Water-based and eco-friendly",
+                "Fast-drying formula"
+            ],
+            bulkPricing: [
+                { quantity: "50-99", price: "1500Rs" },
+                { quantity: "100-499", price: "1400Rs" },
+                { quantity: "500-999", price: "1300Rs" },
+                { quantity: "1000+", price: "1200Rs" }
+            ]
+        },
+        {
+            id: 7,
+            name: "Non-slip Floor Mats (Bulk Pack)",
+            company: "MatPro",
+            price: "250Rs per mat",
+            minOrder: "Minimum order: 30 mats",
+            image: "img/floor-mat.webp",
+            description: "Durable, non-slip floor mats perfect for indoor and outdoor use. Available in various sizes and designs. Easy to clean, anti-skid backing for safety, and designed for high-traffic areas.",
+            specs: [
+                "Material: High-density PVC",
+                "Sizes: 60x90 cm, 90x120 cm, Custom sizes",
+                "Colors: Black, Grey, Red, Blue",
+                "Anti-skid backing",
+                "Weather-resistant, easy to clean"
+            ],
+            bulkPricing: [
+                { quantity: "30-99", price: "250Rs" },
+                { quantity: "100-499", price: "230Rs" },
+                { quantity: "500-999", price: "210Rs" },
+                { quantity: "1000+", price: "190Rs" }
+            ]
+        },
+        {
+            id: 8,
+            name: "Premium Leather Bags (Bulk Pack)",
+            company: "LeatherCraft",
+            price: "1500Rs per bag",
+            minOrder: "Minimum order: 50 bags",
+            image: "img/leather-bag.webp",
+            description: "Handcrafted premium leather bags suitable for travel, business, and daily use. Available in various styles and colors. Ideal for fashion retailers and bulk purchasers.",
+            specs: [
+                "Material: Genuine Leather",
+                "Available styles: Duffel, Laptop, Messenger",
+                "Color options: Brown, Black, Tan, Navy",
+                "Lined interior with multiple compartments",
+                "Durable zippers, adjustable straps"
+            ],
+            bulkPricing: [
+                { quantity: "50-99", price: "1500Rs" },
+                { quantity: "100-499", price: "1400Rs" },
+                { quantity: "500-999", price: "1300Rs" },
+                { quantity: "1000+", price: "1200Rs" }
+            ]
+        }
+
+
+
+
+    ];
+
+    // Function to generate product cards
+    function generateProductCards() {
+        const productsGrid = document.getElementById('productsGrid');
+        
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.dataset.productId = product.id;
+            
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">${product.name}</div>
+                    <div class="company-name">${product.company}</div>
+                    <div class="product-price">${product.price}</div>
+                    <div class="min-order">${product.minOrder}</div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => openProductDetail(product));
+            productsGrid.appendChild(card);
+        });
+    }
+
+    // Function to open product detail
+    function openProductDetail(product) {
+        const detailElement = document.getElementById('productDetail');
+        const detailImage = document.getElementById('detailImage');
+        const detailName = document.getElementById('detailName');
+        const detailCompany = document.getElementById('detailCompany');
+        const detailPrice = document.getElementById('detailPrice');
+        const detailMinOrder = document.getElementById('detailMinOrder');
+        const detailDescription = document.getElementById('detailDescription');
+        const detailSpecs = document.getElementById('detailSpecs');
+        const bulkPricingTable = document.getElementById('bulkPricingTable');
+        
+        // Set basic info
+        detailImage.src = product.image;
+        detailImage.alt = product.name;
+        detailName.textContent = product.name;
+        detailCompany.textContent = product.company;
+        detailPrice.textContent = product.price;
+        detailMinOrder.textContent = product.minOrder;
+        detailDescription.textContent = product.description;
+        
+        // Generate specifications list
+        let specsHTML = '<h3>Specifications</h3><ul>';
+        product.specs.forEach(spec => {
+            specsHTML += `<li>${spec}</li>`;
+        });
+        specsHTML += '</ul>';
+        detailSpecs.innerHTML = specsHTML;
+        
+        // Generate bulk pricing table
+        bulkPricingTable.innerHTML = '';
+        product.bulkPricing.forEach(tier => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${tier.quantity}</td>
+                <td>${tier.price}</td>
+            `;
+            bulkPricingTable.appendChild(row);
+        });
+        
+        // Reset quantity input
+        document.getElementById('quantity').value = 1;
+        
+        // Display the modal
+        detailElement.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    // Function to close product detail
+    function closeDetail() {
+        const detailElement = document.getElementById('productDetail');
+        detailElement.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Function to add to cart
+    // Function to add to cart
+function addToCart() {
+    const badgeElement = document.getElementById('badge');
+    let currentCount = parseInt(badgeElement.innerText);
+    const quantity = parseInt(document.getElementById('quantity').value);
+    
+    if (quantity > 0) {
+        // Get selected product details
+        const productName = document.getElementById('detailName').textContent;
+        const productCompany = document.getElementById('detailCompany').textContent;
+        const productPrice = document.getElementById('detailPrice').textContent;
+        const productImage = document.getElementById('detailImage').src;
+        
+        // Create cart item object
+        const cartItem = {
+            name: productName,
+            company: productCompany,
+            price: productPrice,
+            image: productImage,
+            quantity: quantity
+        };
+        
+        // Get existing cart items
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        
+        // Add new item to cart
+        cartItems.push(cartItem);
+        
+        // Save cart to localStorage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+        // Update cart badge
+        badgeElement.innerText = cartItems.length;
+        
+        // Show confirmation message
+        alert(`Added ${quantity} units to cart!`);
+        
+        // Close product detail
+        closeDetail();
+    } else {
+        alert("Please enter a valid quantity.");
+    }
+}
+    
+    // Function to request quote
+    function requestQuote() {
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const productName = document.getElementById('detailName').textContent;
+        
+        if (quantity > 0) {
+            alert(`Quote request for ${quantity} units of ${productName} has been sent! Our sales team will contact you within 24 hours.`);
+        } else {
+            alert("Please enter a valid quantity.");
+        }
+    }
+
+    // Initialize the page
+    window.onload = function() {
+        generateProductCards();
+    };
+</script>
+
+<!-- content JS -->
+<script src="content.js"></script>
+<script src="login.js"></script>
+<script src="register.js"></script>
+</html>

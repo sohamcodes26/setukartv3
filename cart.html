@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping Cart | E-COMMERCE WEBSITE</title>
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <!-- header links -->
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/header2.css">
+    
+    <!-- Cart page styling -->
+    <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .cart-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .cart-empty h2 {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .cart-empty a {
+            display: inline-block;
+            background-color: #e63946;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cart-empty a:hover {
+            background-color: #c1121f;
+        }
+
+        .cart-items {
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .cart-item-company {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: #e63946;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .cart-item-quantity span {
+            margin-right: 10px;
+        }
+
+        .quantity-btn {
+            background-color: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #ddd;
+        }
+
+        .quantity-value {
+            margin: 0 10px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .cart-item-remove {
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px 10px;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+
+        .cart-item-remove:hover {
+            color: #e63946;
+        }
+
+        .cart-item-total {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .cart-summary {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .cart-summary-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart-summary-value {
+            color: #333;
+        }
+
+        .cart-summary-total {
+            border-top: 2px solid #ddd;
+            margin-top: 10px;
+            padding-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #e63946;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .continue-shopping {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .continue-shopping:hover {
+            background-color: #ddd;
+        }
+
+        .checkout-btn {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #c1121f;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-item-image {
+                margin-bottom: 15px;
+            }
+
+            .cart-item-total {
+                margin-top: 15px;
+                text-align: left;
+            }
+
+            .cart-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .continue-shopping, .checkout-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div id="1">
+        <header>
+            <section>
+                <!-- MAIN CONTAINER -->
+                <div id="container">
+
+                    <!-- SHOP NAME -->
+                    <div id="shopName"><a href="index.html"><img src="img/logo.jpg" alt=""></div>
+
+                        <!-- COLLCETIONS ON WEBSITE -->
+                        <div id="collection">
+                            <div id="clothing"><a href="clothing.html"> CLOTHING </a></div>
+                            <div id="accessories"><a href="accessories.html"> ACCESSORIES </a></div>
+                        </div>
+
+                        <!-- SEARCH SECTION -->
+                        <div id="search">
+                            <i class="fas fa-search search"></i>
+                            <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories">
+                        </div>
+
+                        <!-- USER SECTION (CART AND USER ICON) -->
+                        <div id="user">
+                            <a id="cartbtn" href="cart.html"><img style="width: 48px;" src="img/cart.webp" alt=""><div id="badge"> 0 </div></a>
+                            
+                            <a id="usrbtn" href="profile.html"> <img style="width: 50px;" src="img/profile.webp" alt=""></a>
+                        </div>
+                </div>
+    
+            </section>
+        </header>
+    </div>
+
+    <!-- CART CONTENT -->
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <div id="cartContent">
+            <!-- Cart items will be inserted here -->
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="4"></div>
+    <script>
+        load("footer.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(4).innerHTML = req.responseText;
+        }
+    </script>
+
+    <!-- Cart JS -->
+    <script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .profile-item {
+            margin-bottom: 15px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .profile-value {
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .back-button {
+            display: block;
+            width: 97%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+
+        .license-preview {
+            max-width: 100%;
+            max-height: 200px;
+            display: block;
+            margin: 10px 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <div id="profileData">
+            <!-- Profile data will be inserted here -->
+        </div>
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get user data from localStorage
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            
+            if (userData) {
+                const profileDataContainer = document.getElementById('profileData');
+                
+                // Create profile data display
+                let profileHTML = '';
+                
+                // Full Name
+                profileHTML += createProfileItem('Full Name', userData.name || 'Not provided');
+                
+                // Phone Number
+                profileHTML += createProfileItem('Phone Number', userData.phone || 'Not provided');
+                
+                // Address
+                profileHTML += createProfileItem('Address', userData.address || 'Not provided');
+                
+                // Type of Shopkeeper/Wholesaler
+                profileHTML += createProfileItem('Type', userData.type || 'Not provided');
+                
+                // Role
+                profileHTML += createProfileItem('Role', userData.role || 'Not provided');
+                
+                // License (if available)
+                if (userData.licensePreview) {
+                    profileHTML += `
+                        <div class="profile-item">
+                            <span class="profile-label">License:</span>
+                            <div class="profile-value">
+                                <img src="${userData.licensePreview}" alt="License" class="license-preview">
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                profileDataContainer.innerHTML = profileHTML;
+            } else {
+                // No user data found
+                document.getElementById('profileData').innerHTML = `
+                    <div class="profile-item">
+                        <p>No profile information found. Please complete the registration form.</p>
+                    </div>
+                `;
+            }
+        });
+        
+        function createProfileItem(label, value) {
+            return `
+                <div class="profile-item">
+                    <span class="profile-label">${label}:</span>
+                    <div class="profile-value">${value}</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
