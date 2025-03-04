@@ -71,7 +71,7 @@
             <input type="tel" id="phone" name="phone" required pattern="^\+?[1-9]\d{1,14}$" placeholder="Enter phone number">
 
             <!-- Driver License -->
-            <label for="License">Upload Applicable License(GST Registration/FSSAI License/etc):</label>
+            <label for="License">Upload Applicable License (GST Registration/FSSAI License/etc):</label>
             <input type="file" id="License" name="License" accept="image/*,application/pdf" required>
 
             <!-- Address -->
@@ -93,7 +93,6 @@
             <!-- Submit Button -->
             <button type="submit">Submit</button>
         </form>
-
     </div>
 
     <script>
@@ -103,14 +102,17 @@
             // Collect form data
             const formData = new FormData(this);
             const userData = {};
-            
+
             // Extract and store regular form fields
             userData.name = formData.get('name');
             userData.phone = formData.get('phone');
             userData.address = formData.get('address');
             userData.type = formData.get('type');
             userData.role = formData.get('role');
-            
+
+            // Get selected role before file reading
+            var selectedRole = document.getElementById("role").value;
+
             // Handle license file
             const licenseFile = document.getElementById('License').files[0];
             if (licenseFile) {
@@ -118,17 +120,15 @@
                 reader.onload = function(e) {
                     // Store the license file as a data URL
                     userData.licensePreview = e.target.result;
-                    
+
                     // Save all user data to localStorage
                     localStorage.setItem('userData', JSON.stringify(userData));
-                    
-                    // Show success message and redirect
+
+                    // Show success message and redirect based on role
                     alert('Registration Successful!');
-                    if(selectedRole=="Shopkeeper")
-                    {
+                    if (selectedRole === "shopkeeper") { 
                         window.location.href = 'index2.html';
-                    }
-                    else{
+                    } else { 
                         window.location.href = 'index3.html';
                     }
                 };
@@ -136,15 +136,12 @@
             } else {
                 // Save user data without license
                 localStorage.setItem('userData', JSON.stringify(userData));
-                var selectedRole = document.getElementById("role").value;
-                
-                // Show success message and redirect
+
+                // Show success message and redirect based on role
                 alert('Registration Successful!');
-                if(selectedRole=="Shopkeeper")
-                {
+                if (selectedRole === "shopkeeper") { 
                     window.location.href = 'index2.html';
-                }
-                else{
+                } else { 
                     window.location.href = 'index3.html';
                 }
             }
